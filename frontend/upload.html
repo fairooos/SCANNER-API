@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scanner - Upload</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 id="upload-title">Upload Document</h1>
+            <p>Drag and drop your file or click to browse</p>
+        </header>
+
+        <div class="upload-container">
+            <div class="drop-zone" id="drop-zone">
+                <div class="drop-zone-content">
+                    <div class="card-icon" style="font-size: 4rem; margin-bottom: 1rem;">☁️</div>
+                    <h3>Drag & Drop File Here</h3>
+                    <p style="margin: 1rem 0; color: #666;">Supports JPG, PNG (Max 10MB)</p>
+                    <button class="btn" id="upload-btn">Browse Files</button>
+                    <input type="file" id="file-input" class="file-input" accept=".jpg,.jpeg,.png">
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="index.html" class="btn btn-secondary">← Back to Selection</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loader Overlay -->
+    <div class="loader" id="loader">
+        <div class="spinner"></div>
+        <p style="margin-top: 1rem; color: white;">Processing Document...</p>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scanner - Results</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Scan <span class="gradient-text">Results</span></h1>
+            <p>Here is the data extracted from your document</p>
+        </header>
+
+        <div class="result-container">
+            <div class="result-split">
+                <!-- Image Preview Column -->
+                <div>
+                    <div class="image-preview">
+                        <img id="result-image" src="" alt="Scanned Document">
+                    </div>
+                </div>
+
+                <!-- Data Fields Column -->
+                <div>
+                    <div class="data-fields" id="fields-container">
+                        <!-- Fields will be injected here by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem; display: flex; gap: 1rem; justify-content: center;">
+                <a href="index.html" class="btn btn-secondary">Start New Scan</a>
+                <button onclick="window.print()" class="btn">Print / Save PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
