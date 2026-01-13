@@ -16,10 +16,7 @@ router = APIRouter()
     description="Check if the API is running and responsive"
 )
 async def health_check():
-    """
-    Health check endpoint.
-    Returns service status and timestamp.
-    """
+   
     return HealthResponse(
         status="healthy",
         timestamp=datetime.utcnow().isoformat(),

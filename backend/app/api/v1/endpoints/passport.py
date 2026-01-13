@@ -1,6 +1,4 @@
-"""
-Passport scanning endpoint.
-"""
+
 from fastapi import APIRouter, UploadFile, File, HTTPException
 from app.models.responses import ScanResponse, ErrorResponse
 from app.pipelines.passport import PassportPipeline
@@ -8,7 +6,7 @@ from app.utils.image import validate_file_upload, load_image_from_bytes
 
 router = APIRouter()
 
-# Singleton pipeline instance
+
 _pipeline = None
 
 
@@ -36,31 +34,20 @@ def get_pipeline() -> PassportPipeline:
 async def scan_passport(
     file: UploadFile = File(..., description="Passport image (JPG, PNG)")
 ):
-    """
-    Scan passport and extract MRZ fields.
-    
-    This endpoint:
-    1. Validates the uploaded file
-    2. Detects and reads MRZ using passporteye
-    3. Parses MRZ according to ICAO 9303
-    4. Validates checksums
-    5. Returns structured response
-    """
+   
     try:
-        # Read file
+      
         file_content = await file.read()
         
-        # Validate file
+       
         validate_file_upload(file.filename, len(file_content))
-        
-        # Load image
+       
         image = load_image_from_bytes(file_content)
         
-        # Get pipeline and process
+
         pipeline = get_pipeline()
         result = pipeline.run(image)
-        
-        # Return response
+      
         return ScanResponse(
             document_type="passport",
             fields=result["fields"],
@@ -70,11 +57,11 @@ async def scan_passport(
         )
     
     except HTTPException:
-        # Re-raise HTTP exceptions
+        
         raise
     
     except Exception as e:
-        # Catch-all for unexpected errors
+        
         raise HTTPException(
             status_code=500,
             detail=f"Internal server error during passport processing"

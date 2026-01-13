@@ -1,6 +1,4 @@
-"""
-Development server runner for SCANNER API.
-"""
+
 import uvicorn
 
 if __name__ == "__main__":

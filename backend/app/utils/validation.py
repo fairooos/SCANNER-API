@@ -1,31 +1,18 @@
-"""
-Validation utilities for extracted document fields.
-Implements domain-specific business rules.
-"""
+
 import re
 from datetime import datetime
 from typing import Optional
 
 
 def validate_emirates_id_number(id_number: str) -> tuple[bool, Optional[str]]:
-    """
-    Validate Emirates ID number format.
-    Expected format: 784-YYYY-NNNNNNN-C
-    - 784: Country code
-    - YYYY: Year
-    - NNNNNNN: 7-digit sequence
-    - C: Check digit
     
-    Returns:
-        (is_valid, error_message)
-    """
     if not id_number:
         return False, "ID number is empty"
     
-    # Remove spaces and normalize dashes
+   
     clean_id = id_number.strip().replace(" ", "")
     
-    # Pattern: 784-YYYY-NNNNNNN-C
+    
     pattern = r'^784-\d{4}-\d{7}-\d{1}$'
     
     if not re.match(pattern, clean_id):
@@ -35,12 +22,7 @@ def validate_emirates_id_number(id_number: str) -> tuple[bool, Optional[str]]:
 
 
 def validate_date_consistency(issue_date: Optional[str], expiry_date: Optional[str]) -> tuple[bool, Optional[str]]:
-    """
-    Validate that expiry date is after issue date.
-    
-    Returns:
-        (is_valid, error_message)
-    """
+   
     if not issue_date or not expiry_date:
         return True, None  # Skip validation if either date is missing
     
@@ -57,19 +39,13 @@ def validate_date_consistency(issue_date: Optional[str], expiry_date: Optional[s
 
 
 def validate_passport_number(passport_number: str, country_code: str = None) -> tuple[bool, Optional[str]]:
-    """
-    Validate passport number format.
-    Basic validation - alphanumeric, 6-9 characters.
     
-    Returns:
-        (is_valid, error_message)
-    """
     if not passport_number:
         return False, "Passport number is empty"
     
     clean_number = passport_number.strip().replace(" ", "")
     
-    # Most passports are 6-9 alphanumeric characters
+    
     if not re.match(r'^[A-Z0-9]{6,9}$', clean_number, re.IGNORECASE):
         return False, f"Invalid passport number format: {passport_number}"
     
@@ -77,15 +53,6 @@ def validate_passport_number(passport_number: str, country_code: str = None) -> 
 
 
 def validate_sex(sex: str) -> tuple[bool, Optional[str]]:
-    """
-    Validate sex/gender field.
-    Accepts: M, F, Male, Female (case-insensitive)
-    
-    Returns:
-        (is_valid, error_message)
-    """
-    if not sex:
-        return False, "Sex field is empty"
     
     normalized = sex.strip().upper()
     
@@ -98,18 +65,8 @@ def validate_sex(sex: str) -> tuple[bool, Optional[str]]:
 
 
 def validate_mrz_checksum(data: str, check_digit: str) -> bool:
-    """
-    Validate MRZ check digit using ICAO 9303 algorithm.
-    
-    Args:
-        data: Data string to validate
-        check_digit: Expected check digit
-    
-    Returns:
-        True if checksum is valid
-    """
     if not check_digit or check_digit == '<':
-        return True  # Skip if check digit is filler
+        return True  
     
     weights = [7, 3, 1]
     char_values = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ<'
