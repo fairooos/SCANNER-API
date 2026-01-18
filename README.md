@@ -2,7 +2,8 @@
 
 Production-grade document scanning system for Emirates ID and Passport processing.
 
-## Architecture Overview
+## Architecture Overview      
+
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
